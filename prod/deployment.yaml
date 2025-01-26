@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  labels:
+    app: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      imagePullSecrets:
+        - name: facegram-registery
+      containers:
+        - name: notification-service
+          image: ""
+          ports:
+            - containerPort: 30000
+          env:
+            - name: NODE_ENV
+              value: "pro"   
+          envFrom:
+            - secretRef:
+                name: rabbitmq-credential
+            - secretRef:
+                name: arangodb-credential 
+            - secretRef:
+                name: call-server-credential 
+            - secretRef:
+                name: internal-encryption-keys 
+            - secretRef:
+                name: sms-credential
+            - secretRef:
+                name: smtp-credential  
+            - secretRef:
+                name: sentry-credential 
