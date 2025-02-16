@@ -1,41 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notification-service
+  name: notification-server
   labels:
-    app: notification-service
+    app: notification-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notification-service
+      app: notification-server
   template:
     metadata:
       labels:
-        app: notification-service
+        app: notification-server
     spec:
       imagePullSecrets:
         - name: facegram-registery
       containers:
-        - name: notification-service
-          image: cr.fcgm.run/repository/facegram/notification-service:5c1261e7
+        - name: notification-server
+          image: ""
           ports:
-            - containerPort: 30000
+            - containerPort: 30001
           env:
             - name: NODE_ENV
-              value: "dev"  
+              value: "dev"   
           envFrom:
+            - secretRef:
+                name: grpc-client-configs
             - secretRef:
                 name: rabbitmq-credential
             - secretRef:
-                name: arangodb-credential 
+                name: arangodb-credential
             - secretRef:
-                name: call-server-credential 
+                name: call-api-credential  
             - secretRef:
-                name: internal-encryption-keys 
+                name: sms-api-credential
             - secretRef:
-                name: sms-credential
+                name: smtp-credential
             - secretRef:
-                name: smtp-credential 
+                name: sentry-credential
             - secretRef:
-                name: sentry-credential                                       
+                name: aes-keys                                                             
