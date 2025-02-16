@@ -18,7 +18,7 @@ spec:
         - name: facegram-registery
       containers:
         - name: notification-server
-          image: cr.fcgm.dev/facegram/notification-service:115c2b59
+          image: cr.fcgm.dev/facegram/notification-service:14e3ecdd
           ports:
             - containerPort: 30001
           env:
