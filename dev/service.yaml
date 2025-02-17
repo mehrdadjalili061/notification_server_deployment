@@ -7,7 +7,7 @@ spec:
     app: notification-server
   ports:
     - protocol: TCP
-      port: 30001
-      targetPort: 30001
-      nodePort: 30001
+      port: 30000
+      targetPort: 30000
+      nodePort: 30000
   type: NodePort

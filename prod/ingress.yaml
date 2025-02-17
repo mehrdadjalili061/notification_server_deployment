@@ -15,4 +15,4 @@ spec:
           service:
             name: notification-server-service
             port:
-              number: 30001
+              number: 30000
